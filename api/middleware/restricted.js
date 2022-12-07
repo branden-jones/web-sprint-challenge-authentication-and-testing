@@ -1,5 +1,8 @@
-module.exports = (req, res, next) => {
-  next();
+const { JWT_SECRET } = require('../index') //eslint-disable-line
+const jwt = require('jsonwebtoken')  //eslint-disable-line
+
+module.exports = (req, res, next) => {  //eslint-disable-line
+  // const token = req.headers.authorization
   /*
     IMPLEMENT
 
