@@ -9,7 +9,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const {JWT_SECRET} = require('../index');
 
-router.post('/register',validateCredentials, registerName, async (req, res, next) => {
+router.post('/register', validateCredentials, registerName, async (req, res, next) => {
   /*
     IMPLEMENT
     You are welcome to build additional middlewares to help with the endpoint's functionality.
