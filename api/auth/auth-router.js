@@ -56,7 +56,7 @@ router.post('/register', registerName, async (req, res, next) => {
       }
 });
 
-router.post('/login', findPastUser, async (req, res, next) => {
+router.post('/login', findPastUser, async (req, res, next) => { //eslint-disable-line
   /*
     IMPLEMENT
     You are welcome to build additional middlewares to help with the endpoint's functionality.
@@ -89,10 +89,7 @@ router.post('/login', findPastUser, async (req, res, next) => {
       })
   }
   else{
-    next({
-      status: 401,
-      message: 'invalid credentials'
-    })
+    res.status(401).json('invalid credentials')
   }
 });
 
