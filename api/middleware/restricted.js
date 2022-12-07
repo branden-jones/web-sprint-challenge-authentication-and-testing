@@ -2,7 +2,23 @@ const { JWT_SECRET } = require('../index') //eslint-disable-line
 const jwt = require('jsonwebtoken')  //eslint-disable-line
 
 module.exports = (req, res, next) => {  //eslint-disable-line
-  // const token = req.headers.authorization
+  const token = req.headers.authorization;
+  if(!token){
+   res.json(`token required`)
+  }
+  jwt.verify(token, JWT_SECRET, (err, decodedToken) => {
+    if(err){
+      next({
+        status: 401,
+        message: 'invalid token'
+      })
+    }
+    else{
+      req.decodedToken = decodedToken
+      next()
+    }
+  })
+
   /*
     IMPLEMENT
 
