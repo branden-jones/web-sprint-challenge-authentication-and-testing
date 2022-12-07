@@ -11,10 +11,7 @@ const registerName = async (req,res,next) => {
         next()
     }
     else{
-        next({
-            status: 400,
-            message: 'username already exists'
-        })
+        res.status(401).json(`username taken`)
     }
 }
 
@@ -23,10 +20,7 @@ const findPastUser = async (req,res,next) => {
     
     try{
         if( !username || !password ){
-            next({
-                status: 401,
-                message: 'username and password required'
-            })
+            res.status(401).json('username and password required')
         }
         else{
             const pastUser = await getByName(username)
@@ -35,10 +29,7 @@ const findPastUser = async (req,res,next) => {
                 next()
             }
             else{
-                next({
-                    status: 401,
-                    message: 'invalid credentials'
-                })
+                res.status(401).json('invalid credentials')
             }
         }
     }

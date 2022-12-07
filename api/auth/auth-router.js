@@ -48,7 +48,9 @@ router.post('/register', registerName, async (req, res, next) => {
             username: username,
             password: token
           })
+          setTimeout(() => {
             res.status(201).json(newUser)
+          }, 500)
           }
         }
       catch(err){
@@ -82,11 +84,14 @@ router.post('/login', findPastUser, async (req, res, next) => { //eslint-disable
   */
   const { username, password } = req.body
   if(bcrypt.compareSync(password, req.user.password)){
-    const token = buildToken(req.user)
+    setTimeout(() => {
+      const token = buildToken(req.user)
       res.json({
         message: `welcome, ${username}`,
         token
       })
+    }, 500)
+    
   }
   else{
     res.status(401).json('invalid credentials')
