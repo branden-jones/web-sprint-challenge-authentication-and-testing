@@ -2,13 +2,14 @@ const router = require('express').Router();
 const AuthModel = require('./auth-model')
 const {
   registerName,
-  findPastUser
+  findPastUser,
+  validateCredentials
 } = require('../middleware/middleware')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const {JWT_SECRET} = require('../index');
 
-router.post('/register', registerName, async (req, res, next) => {
+router.post('/register',validateCredentials, registerName, async (req, res, next) => {
   /*
     IMPLEMENT
     You are welcome to build additional middlewares to help with the endpoint's functionality.
@@ -48,9 +49,7 @@ router.post('/register', registerName, async (req, res, next) => {
             username: username,
             password: token
           })
-          setTimeout(() => {
             res.status(201).json(newUser)
-          }, 500 || 0)
           }
         }
       catch(err){
@@ -84,13 +83,13 @@ router.post('/login', findPastUser, async (req, res, next) => { //eslint-disable
   */
   const { username, password } = req.body
   if(bcrypt.compareSync(password, req.user.password)){
-    setTimeout(() => {
+    // setTimeout(() => {
       const token = buildToken(req.user)
       res.json({
         message: `welcome, ${username}`,
         token
       })
-    }, 500 || 0)
+    // }, 1000 || 0)
     
   }
   else{

@@ -1,17 +1,15 @@
-const db = require('../../data/dbConfig')
-
 // Write your tests here
 test('sanity', () => {
-  expect(true).toBe(true)
+  expect(true).toBe(false)
 })
 
+jest.setTimeout(750)
+const db = require('../data/dbConfig')
 beforeAll(async () => {
     await db.migrate.rollback()
     await db.migrate.latest()
   })
-  afterAll(async () => {
-    await db.destroy()
-  })
+  
   beforeEach(async () => {
     await db.seed.run()
   })
