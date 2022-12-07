@@ -50,7 +50,7 @@ router.post('/register', registerName, async (req, res, next) => {
           })
           setTimeout(() => {
             res.status(201).json(newUser)
-          }, 500)
+          }, 500 || 0)
           }
         }
       catch(err){
@@ -90,7 +90,7 @@ router.post('/login', findPastUser, async (req, res, next) => { //eslint-disable
         message: `welcome, ${username}`,
         token
       })
-    }, 500)
+    }, 500 || 0)
     
   }
   else{
